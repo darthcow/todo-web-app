@@ -26,4 +26,9 @@ this.todoList = this.todoList.filter(t => t.id !== todo.id);
 // Remove from server
 this.todoService.deleteTodo(todo).subscribe();
   }
+
+  addTodo(todo: Todo) {
+this.todoService.addTodo(todo).subscribe();
+this.todoList.push(todo);
+  }
 }
