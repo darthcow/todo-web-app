@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Todo} from '../../models/Todo';
 import {HttpClient} from '@angular/common/http';
+import {TodoService} from '../../services/todo.service';
 // import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
@@ -10,8 +11,9 @@ import {HttpClient} from '@angular/common/http';
 })
 export class TodoItemComponent implements OnInit {
 @Input() todoItem: Todo;
+@Output() deleteTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
   notChecked: boolean;
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
 // if (this.notChecked !== true)
@@ -29,10 +31,14 @@ export class TodoItemComponent implements OnInit {
   }
 
   onToogle(todoItem: Todo) {
-todoItem.completed = !todoItem.completed;
+// Toogle on UI
+    todoItem.completed = !todoItem.completed;
+  // Toggle on server
+    this.todoService.toggleCompleted(todoItem).subscribe(todo => console.log(todo));
+
   }
 
   onDelete(todoItem: Todo) {
-
+this.deleteTodo.emit(todoItem);
   }
 }
