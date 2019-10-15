@@ -29,6 +29,6 @@ this.todoService.deleteTodo(todo).subscribe();
 
   addTodo(todo: Todo) {
 this.todoService.addTodo(todo).subscribe();
-this.todoList.push(todo);
+this.todoList.unshift(todo);
   }
 }
