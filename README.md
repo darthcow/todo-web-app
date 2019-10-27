@@ -1,2 +1,2 @@
 # todo-web-app
-simple Todo app to study angular basics.
+simple Todo List app to study angular basics.
